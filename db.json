@@ -1,0 +1,62 @@
+{
+  "registedTraing": [
+    {
+      "id": 1,
+      "userName": "José Atanazio",
+      "dateTraining": "2022-03-05",
+      "listTraining": [
+        {
+          "id": 1,
+          "exerciseType": "Supino declinado com Halteres",
+          "weight": 10,
+          "amountRepetition": 10
+        },
+        {
+          "id": 2,
+          "exerciseType": "One Arm Row com Halteres",
+          "weight": 15,
+          "amountRepetition": 12
+        }
+      ],
+      "isPaid?": false
+    },
+    {
+      "id": 2,
+      "userName": "Maria Aparecida",
+      "dateTraining": "2022-03-07",
+      "listTraining": [
+        {
+          "id": 1,
+          "exerciseType": "Trícep extension",
+          "weight": 20,
+          "amountRepetition": 10
+        },
+        {
+          "id": 2,
+          "exerciseType": "Calf Raise sentado",
+          "weight": 15,
+          "amountRepetition": 12
+        }
+      ],
+      "isPaid?": true
+    }
+  ],
+
+  "exercises": [
+    { "id": 1, "exerciseType": "Supino declinado com Halteres" },
+    { "id": 2, "exerciseType": "push up" },
+    { "id": 3, "exerciseType": "One Arm Row com Halteres" },
+    { "id": 4, "exerciseType": "Bent Over Row com Barra " },
+    { "id": 5, "exerciseType": "Bícep curl com Barra W" },
+    { "id": 6, "exerciseType": "Bícep Curl com Halteres" },
+    { "id": 7, "exerciseType": "Trícep extension" },
+    { "id": 8, "exerciseType": "Trícep Deep" },
+    { "id": 9, "exerciseType": "everse Fly com halteres (deitado)" },
+    { "id": 10, "exerciseType": "Lateral Raise na Polia " },
+    { "id": 11, "exerciseType": "Agachamentos com Barra" },
+    { "id": 12, "exerciseType": "Dead lift" },
+    { "id": 13, "exerciseType": "Leg Curl" },
+    { "id": 14, "exerciseType": "Calf Raise" },
+    { "id": 15, "exerciseType": "Calf Raise sentado" }
+  ]
+}

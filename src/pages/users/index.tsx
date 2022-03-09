@@ -1,0 +1,127 @@
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Icon,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { AiOutlineEdit } from "react-icons/ai";
+import { BsTrash } from "react-icons/bs";
+import Header from "../../components/Header/header";
+import SidebarNav from "../../components/SideBar/SidebarNav";
+import { IUserListProps } from "../../components/User/IUser";
+
+import { api } from "../../services/api";
+
+export default function ListUsers() {
+  const router = useRouter();
+
+  const [users, setUsers] = useState<IUserListProps[]>([]);
+
+  async function updateTable() {
+    const response = await api.get("users");
+    setUsers(response.data);
+  }
+
+  function handleDelete(id) {
+    api.delete(`users/${id}`).then(() => updateTable());
+  }
+
+  const fetchData = async () => {
+    const retriveData = await api.get("users");
+    return retriveData.data;
+  };
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      const allUsers = await fetchData();
+      if (allUsers) setUsers(allUsers);
+    };
+    getAllUsers();
+  }, []);
+
+  return (
+    <Box>
+      <Header />
+      <Flex width="100%" my="6" maxWidth="1480px" mx="auto" px="6">
+        <SidebarNav />
+
+        <Flex as="main" flex="1">
+          <Flex>
+            <Flex>
+              <Table variant="simple">
+                <Thead>
+                  <Tr height="20px">
+                    <Th>Nome / Email</Th>
+                    <Th>Tipo de usuário</Th>
+                    <Th>Estado do usuário</Th>
+                    <Th>Data da Aniversário</Th>
+                    <Th>Ações</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {users.map((data) => {
+                    return (
+                      <Tr key={data.id} height="30px">
+                        <Td>
+                          {data.userName} <br /> <span>{data.userEmail}</span>
+                        </Td>
+                        <Td>{data.userType}</Td>
+                        <Td>{data.isActive === true ? "Ativo" : "Inativo"}</Td>
+                        <Td>
+                          {" "}
+                          {new Intl.DateTimeFormat("pt-BR").format(
+                            data.birthdayDate
+                          )}
+                        </Td>
+                        <Td>
+                          <HStack spacing="10px">
+                            <Button
+                              backgroundColor="gray.900"
+                              _hover={{ bg: "gray.800" }}
+                            >
+                              {" "}
+                              <Icon
+                                as={AiOutlineEdit}
+                                fontSize="25px"
+                                color="blue.500"
+                              />
+                            </Button>
+                            <Button
+                              onClick={() => handleDelete(data.id)}
+                              backgroundColor="gray.900"
+                              _hover={{ bg: "gray.800" }}
+                              _active={{
+                                borderColor: "gray.900",
+                              }}
+                            >
+                              {" "}
+                              <Icon
+                                as={BsTrash}
+                                fontSize="25px"
+                                color="red.500"
+                              />
+                            </Button>
+                          </HStack>
+                        </Td>
+                      </Tr>
+                    );
+                  })}
+                  <Tr></Tr>
+                </Tbody>
+              </Table>
+            </Flex>
+          </Flex>
+        </Flex>
+      </Flex>
+    </Box>
+  );
+}
