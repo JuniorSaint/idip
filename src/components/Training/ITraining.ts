@@ -1,13 +1,22 @@
+import { NestedValue } from "react-hook-form";
+
 export interface IRegisterTraing {
   id: number;
   userName: string;
   dateTraining: Date;
-  listTraining: IListTraining[];
+  listTraining: [
+    {
+      id?: number;
+      exerciseType: string;
+      weight: number;
+      amountRepetition: number;
+    }
+  ];
   isPaid?: boolean;
 }
 
 export interface IListTraining {
-  id: number;
+  id?: number;
   exerciseType: string;
   weight: number;
   amountRepetition: number;
