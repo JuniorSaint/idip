@@ -32,9 +32,7 @@ export default function SidebarToggle() {
             <DrawerCloseButton />
             <DrawerHeader>Navegação</DrawerHeader>
 
-            <DrawerBody>
-              <SideBarNav />
-            </DrawerBody>
+            <DrawerBody>{/* <SideBarNav /> */}</DrawerBody>
           </DrawerContent>
         </Drawer>
       </>

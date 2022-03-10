@@ -21,7 +21,11 @@ import { IUserListProps } from "../../components/User/IUser";
 
 import { api } from "../../services/api";
 
-export default function ListUsers() {
+interface ListUsersProps {
+  data: any;
+}
+
+export default function ListUsers({ data }) {
   const router = useRouter();
 
   const [users, setUsers] = useState<IUserListProps[]>([]);
@@ -50,9 +54,9 @@ export default function ListUsers() {
 
   return (
     <Box>
-      <Header />
+      <Header dataProp={data} />
       <Flex width="100%" my="6" maxWidth="1480px" mx="auto" px="6">
-        <SidebarNav />
+        <SidebarNav data={data} />
 
         <Flex as="main" flex="1">
           <Flex>
@@ -125,3 +129,25 @@ export default function ListUsers() {
     </Box>
   );
 }
+
+import jwt_decode from "jwt-decode";
+import { GetServerSideProps } from "next";
+
+interface IDecodeToken {
+  acr: string; // foto
+  aud: string; //
+  email: string; // email
+  exp: number; // expiração
+  sub: string; // tipo de usuário
+  name: string; // userName
+  sid: string; // id do usuário
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const destructureCookie: IDecodeToken = jwt_decode(
+    context.req.cookies.idipToken
+  );
+  const data: IDecodeToken = destructureCookie;
+
+  return { props: { data } };
+};

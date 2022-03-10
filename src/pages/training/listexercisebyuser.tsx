@@ -16,7 +16,11 @@ import { IRegisterTraing } from "../../components/Training/ITraining";
 import { useUserContextProvider } from "../../context/UserContext";
 import { apiJson } from "../../services/api";
 
-export default function Listexercisebyuser() {
+interface ListExerciseByUser {
+  data: any;
+}
+
+export default function ListExerciseByUser({ data }) {
   const [userName, setUserName] = useState<string>("");
   const [initialDate, setInitialDate] = useState<string>();
   const [finalDate, setFinalDate] = useState<string>();
@@ -40,8 +44,7 @@ export default function Listexercisebyuser() {
       console.log(`inicial ${initialDate} final ${initialDate}`);
     }
     const result = listExercise.map((resp) => {
-      return;
-      resp.dateTraining >= initialDate && resp.dateTraining <= finalDate
+      return resp.dateTraining >= initialDate && resp.dateTraining <= finalDate
         ? resp
         : null;
     });
@@ -51,9 +54,9 @@ export default function Listexercisebyuser() {
 
   return (
     <Box>
-      <Header />
+      <Header dataProp={data} />
       <Flex width="100%" my="6" maxWidth="1480px" mx="auto" px="6">
-        <SidebarNav />
+        <SidebarNav data={data} />
 
         <VStack>
           <Flex
@@ -82,9 +85,11 @@ export default function Listexercisebyuser() {
                 }}
                 value={userName}
               >
-                {userForSelect.map((data) => {
+                {userForSelect.map((resp) => {
                   return (
-                    <option value={data?.fullName}>{data?.fullName}</option>
+                    <option value={resp?.id} key={resp.id}>
+                      {resp?.fullName}
+                    </option>
                   );
                 })}
               </select>
@@ -128,3 +133,25 @@ export default function Listexercisebyuser() {
     </Box>
   );
 }
+
+import jwt_decode from "jwt-decode";
+import { GetServerSideProps } from "next";
+
+interface IDecodeToken {
+  acr: string; // foto
+  aud: string; //
+  email: string; // email
+  exp: number; // expiração
+  sub: string; // tipo de usuário
+  name: string; // userName
+  sid: string; // id do usuário
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const destructureCookie: IDecodeToken = jwt_decode(
+    context.req.cookies.idipToken
+  );
+  const data: IDecodeToken = destructureCookie;
+
+  return { props: { data } };
+};

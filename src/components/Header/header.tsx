@@ -4,7 +4,11 @@ import Logo from "./logo";
 import NotificationNav from "./notificationNav";
 import Profile from "./Profile";
 
-export default function Header() {
+interface HeaderProps {
+  dataProp: any;
+}
+
+export default function Header({ dataProp }: HeaderProps) {
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
@@ -23,7 +27,7 @@ export default function Header() {
       <SidebarToggle />
       <Logo />
       <NotificationNav />
-      <Profile showProfileData={isWideVersion} />
+      <Profile showProfileData={isWideVersion} data={dataProp} />
     </Flex>
   );
 }

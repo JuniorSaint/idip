@@ -8,14 +8,10 @@ import { RiTodoLine } from "react-icons/ri";
 import LinkSideBar from "./LinkSideBar";
 import SubTitleSideBar from "./SubTitleSideBar";
 
-const user = {
-  name: "José Atanázio",
-  userType: "admin",
-  avatar: "rosto.jpg",
-  email: "junior.garbage@gmail.com",
-};
-
-export default function SidebarNav() {
+interface SideBarProps {
+  data: any;
+}
+export default function SidebarNav({ data }: SideBarProps) {
   return (
     <Flex
       width="300px"
@@ -25,7 +21,7 @@ export default function SidebarNav() {
       height="85vh"
     >
       <VStack spacing="1rem">
-        {user.userType === "admin" ? (
+        {data?.sub === "admin" ? (
           <VStack spacing="16px" marginTop="24px" alignItems="flex-start">
             <SubTitleSideBar subTitle="Usuários" />
             <LinkSideBar
@@ -42,7 +38,7 @@ export default function SidebarNav() {
         ) : (
           ""
         )}
-        {user.userType === "admin" ? (
+        {data?.sub === "admin" ? (
           <Flex>
             <Divider width="300px" />
           </Flex>
@@ -51,7 +47,7 @@ export default function SidebarNav() {
         )}
         <VStack spacing="16px" marginTop="24px" alignItems="flex-start">
           <SubTitleSideBar subTitle="Treinamento" />
-          {user.userType === "admin" ? (
+          {data?.sub === "admin" ? (
             <VStack spacing="16px">
               <LinkSideBar
                 nameLink="Cadastro de treinamento"

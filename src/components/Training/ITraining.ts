@@ -13,6 +13,6 @@ export interface IListTraining {
   amountRepetition: number;
 }
 
-export type IListExercise = Pick<IListTraining, "exerciseType">;
+export type IListExercise = Pick<IListTraining, "id" | "exerciseType">;
 
 export type IRegisterTrainingProps = Omit<IRegisterTraing, "id">;

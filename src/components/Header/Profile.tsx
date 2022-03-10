@@ -9,7 +9,7 @@ export default function Profile({
   showProfileData = true,
   data,
 }: ProfileProps) {
-  // const avatar = `/public/images/${data.acr}`;
+  const avatar = `/public/images/${data.acr}`;
   return (
     <Flex align="center">
       {showProfileData && (
@@ -20,7 +20,7 @@ export default function Profile({
           </Text>
         </Box>
       )}
-      {/* <Avatar marginLeft="8px" size="md" name="José Atanazio" src={avatar} /> */}
+      <Avatar marginLeft="8px" size="md" name={data.name} src={avatar} />
     </Flex>
   );
 }

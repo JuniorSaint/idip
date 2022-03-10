@@ -8,9 +8,9 @@ import SidebarNav from "../components/SideBar/SidebarNav";
 export default function Welcome({ data }) {
   return (
     <Box>
-      <Header />
+      <Header dataProp={data} />
       <Flex width="100%" my="6" maxWidth="1480px" mx="auto" px="6">
-        <SidebarNav />
+        <SidebarNav data={data} />
         <Flex>{data.email}</Flex>
       </Flex>
     </Box>

@@ -41,7 +41,11 @@ const userSchema = yup
   })
   .required();
 
-export default function CreateUser() {
+interface CreateUserProps {
+  data: any;
+}
+
+export default function CreateUser({ data }) {
   function getServerSideProps() {
     return;
   }
@@ -73,9 +77,9 @@ export default function CreateUser() {
 
   return (
     <Box>
-      <Header />
+      <Header dataProp={data} />
       <Flex width="100%" my="6" maxWidth="1480px" mx="auto" px="6">
-        <SidebarNav />
+        <SidebarNav data={data} />
         <Box
           as="form"
           flex="1"
@@ -213,3 +217,25 @@ export default function CreateUser() {
     </Box>
   );
 }
+
+import jwt_decode from "jwt-decode";
+import { GetServerSideProps } from "next";
+
+interface IDecodeToken {
+  acr: string; // foto
+  aud: string; //
+  email: string; // email
+  exp: number; // expiração
+  sub: string; // tipo de usuário
+  name: string; // userName
+  sid: string; // id do usuário
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const destructureCookie: IDecodeToken = jwt_decode(
+    context.req.cookies.idipToken
+  );
+  const data: IDecodeToken = destructureCookie;
+
+  return { props: { data } };
+};

@@ -39,24 +39,78 @@
         }
       ],
       "isPaid?": true
+    },
+    {
+      "userName": "be670c04-24a4-4bd6-ad5b-33275a4b37a8",
+      "dateTraining": "2022-03-10",
+      "id": 3
+    },
+    {
+      "userName": "003d8b5c-ce4d-4e05-8489-ab3de74fd87f",
+      "dateTraining": "2022-03-02",
+      "id": 4
     }
   ],
-
   "exercises": [
-    { "id": 1, "exerciseType": "Supino declinado com Halteres" },
-    { "id": 2, "exerciseType": "push up" },
-    { "id": 3, "exerciseType": "One Arm Row com Halteres" },
-    { "id": 4, "exerciseType": "Bent Over Row com Barra " },
-    { "id": 5, "exerciseType": "Bícep curl com Barra W" },
-    { "id": 6, "exerciseType": "Bícep Curl com Halteres" },
-    { "id": 7, "exerciseType": "Trícep extension" },
-    { "id": 8, "exerciseType": "Trícep Deep" },
-    { "id": 9, "exerciseType": "everse Fly com halteres (deitado)" },
-    { "id": 10, "exerciseType": "Lateral Raise na Polia " },
-    { "id": 11, "exerciseType": "Agachamentos com Barra" },
-    { "id": 12, "exerciseType": "Dead lift" },
-    { "id": 13, "exerciseType": "Leg Curl" },
-    { "id": 14, "exerciseType": "Calf Raise" },
-    { "id": 15, "exerciseType": "Calf Raise sentado" }
+    {
+      "id": 1,
+      "exerciseType": "Supino declinado com Halteres"
+    },
+    {
+      "id": 2,
+      "exerciseType": "push up"
+    },
+    {
+      "id": 3,
+      "exerciseType": "One Arm Row com Halteres"
+    },
+    {
+      "id": 4,
+      "exerciseType": "Bent Over Row com Barra "
+    },
+    {
+      "id": 5,
+      "exerciseType": "Bícep curl com Barra W"
+    },
+    {
+      "id": 6,
+      "exerciseType": "Bícep Curl com Halteres"
+    },
+    {
+      "id": 7,
+      "exerciseType": "Trícep extension"
+    },
+    {
+      "id": 8,
+      "exerciseType": "Trícep Deep"
+    },
+    {
+      "id": 9,
+      "exerciseType": "everse Fly com halteres (deitado)"
+    },
+    {
+      "id": 10,
+      "exerciseType": "Lateral Raise na Polia "
+    },
+    {
+      "id": 11,
+      "exerciseType": "Agachamentos com Barra"
+    },
+    {
+      "id": 12,
+      "exerciseType": "Dead lift"
+    },
+    {
+      "id": 13,
+      "exerciseType": "Leg Curl"
+    },
+    {
+      "id": 14,
+      "exerciseType": "Calf Raise"
+    },
+    {
+      "id": 15,
+      "exerciseType": "Calf Raise sentado"
+    }
   ]
 }
