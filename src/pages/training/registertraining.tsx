@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import jwt_decode from "jwt-decode";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { BsTrash } from "react-icons/bs";
@@ -17,6 +18,7 @@ import * as yup from "yup";
 
 import { Input as Inputc } from "../../components/Form/Input";
 import Header from "../../components/Header/header";
+import { IDecodeToken } from "../../components/IDecodeToken";
 import SidebarNav from "../../components/SideBar/SidebarNav";
 import {
   IListExercise,
@@ -108,6 +110,9 @@ export default function RegisterTraining({ data }: RegisterTrainingProps) {
 
   return (
     <Box>
+      <Head>
+        <title>Cadastrar Treino</title>
+      </Head>{" "}
       <Header dataProp={data} />
       <Flex width="100%" my="6" maxWidth="1480px" mx="auto" px="6">
         <SidebarNav data={data} />
@@ -182,7 +187,9 @@ export default function RegisterTraining({ data }: RegisterTrainingProps) {
                             marginRight: "10px",
                             fontFamily: "Roboto",
                           }}
-                          {...register("exerciseType")}
+                          {...register(
+                            `listTraining.${index}.exerciseType` as const
+                          )}
                         >
                           <option value="">...</option>
                           {listExercise.map((data) => {
@@ -197,12 +204,13 @@ export default function RegisterTraining({ data }: RegisterTrainingProps) {
                       <Flex flexDirection="column">
                         <FormLabel marginLeft="10px">Carga</FormLabel>
                         <Input
+                          key={field.id}
                           type="number"
                           backgroundColor="gray.900"
                           variant="filled"
                           _hover={{ backgroundColor: "gray.900" }}
                           size="lg"
-                          {...register(`listTraining.${index}.weight`)}
+                          {...register(`listTraining.${index}.weight` as const)}
                         />
                       </Flex>
 
@@ -214,7 +222,9 @@ export default function RegisterTraining({ data }: RegisterTrainingProps) {
                           _hover={{ backgroundColor: "gray.900" }}
                           size="lg"
                           type="number"
-                          {...register(`listTraining.${index}.amountRepetion`)}
+                          {...register(
+                            `listTraining.${index}.amountRepetion` as const
+                          )}
                         />
                       </Flex>
 
@@ -275,16 +285,6 @@ export default function RegisterTraining({ data }: RegisterTrainingProps) {
       </Flex>
     </Box>
   );
-}
-
-interface IDecodeToken {
-  acr: string; // foto
-  aud: string; //
-  email: string; // email
-  exp: number; // expiração
-  sub: string; // tipo de usuário
-  name: string; // userName
-  sid: string; // id do usuário
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

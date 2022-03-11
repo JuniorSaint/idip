@@ -13,70 +13,60 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import jwt_decode from "jwt-decode";
+import { GetServerSideProps } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import * as yup from "yup";
-
 import { Input } from "../../components/Form/Input";
 import Header from "../../components/Header/header";
+import { IDecodeToken } from "../../components/IDecodeToken";
 import SidebarNav from "../../components/SideBar/SidebarNav";
+import {
+  createUser,
+  updateUser,
+  userSchema,
+} from "../../components/User/FunctionsUser";
 import { IUserProps } from "../../components/User/IUser";
 import { api } from "../../services/api";
-
-const userSchema = yup
-  .object({
-    fullName: yup.string().required("Nome completo é obrigatório"),
-    userName: yup.string().required("Nome do usuário é obrigatório"),
-    userEmail: yup
-      .string()
-      .required("Email é obrigatório")
-      .email("Formato do email errado"),
-    password: yup.string().required("Senha é obrigatório"),
-    passwordConfirm: yup
-      .string()
-      .oneOf([null, yup.ref("password")], "As senhas precisam ser iguais"),
-    userImage: yup.string(),
-    isActive: yup.bool().required("Situação do usuário deverá ser informada"),
-    userType: yup.string().required("Tipo de usuário obrigatorio"),
-    birthdayDate: yup.date(),
-  })
-  .required();
 
 interface CreateUserProps {
   data: any;
 }
 
-export default function CreateUser({ data }) {
-  function getServerSideProps() {
-    return;
-  }
+export default function CreateUser({ data }: CreateUserProps) {
+  const router = useRouter();
+  const id = router.query.id;
+
   const {
     register,
     handleSubmit,
-    reset,
-
+    setValue,
     formState: { errors },
   } = useForm<IUserProps>({
     resolver: yupResolver(userSchema),
   });
 
-  const handleCreateUser: SubmitHandler<IUserProps> = async (value, event) => {
-    event.preventDefault();
-    console.log(value);
-
-    try {
-      await api
-        .post("/users", value)
-        .then((response) => {
-          console.log(response.data), reset();
-        })
-        .catch((error) => console.log(error.response.request._response));
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    if (id !== "new") {
+      api.get(`/users/${id}`).then((user) => {
+        console.log(user);
+      });
     }
+  }, []);
+
+  const handleCreateUser: SubmitHandler<IUserProps> = async (value, event) => {
+    return id === "new" ? createUser(value, data) : updateUser(value, data);
   };
 
   return (
     <Box>
+      <Head>
+        <title>
+          {id === "new" ? "Cadastrando Usuário" : "Atualizando Usuário"}
+        </title>
+      </Head>
       <Header dataProp={data} />
       <Flex width="100%" my="6" maxWidth="1480px" mx="auto" px="6">
         <SidebarNav data={data} />
@@ -88,6 +78,7 @@ export default function CreateUser({ data }) {
           padding={["6", "8"]}
           onSubmit={handleSubmit(handleCreateUser)}
         >
+          {console.log(`id: ${id}`)}
           <Heading size="lg" fontWeight="normal">
             Cadastro de Usuário
           </Heading>
@@ -206,7 +197,6 @@ export default function CreateUser({ data }) {
               <Button type="submit" colorScheme="twitter">
                 Salvar
               </Button>
-
               <Button type="reset" colorScheme="teal">
                 Limpar
               </Button>
@@ -218,24 +208,10 @@ export default function CreateUser({ data }) {
   );
 }
 
-import jwt_decode from "jwt-decode";
-import { GetServerSideProps } from "next";
-
-interface IDecodeToken {
-  acr: string; // foto
-  aud: string; //
-  email: string; // email
-  exp: number; // expiração
-  sub: string; // tipo de usuário
-  name: string; // userName
-  sid: string; // id do usuário
-}
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const destructureCookie: IDecodeToken = jwt_decode(
     context.req.cookies.idipToken
   );
   const data: IDecodeToken = destructureCookie;
-
   return { props: { data } };
 };

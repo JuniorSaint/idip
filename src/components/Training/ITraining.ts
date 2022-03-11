@@ -6,7 +6,7 @@ export interface IRegisterTraing {
   dateTraining: Date;
   listTraining: [
     {
-      id?: number;
+      id: number;
       exerciseType: string;
       weight: number;
       amountRepetition: number;
@@ -16,7 +16,7 @@ export interface IRegisterTraing {
 }
 
 export interface IListTraining {
-  id?: number;
+  id: number;
   exerciseType: string;
   weight: number;
   amountRepetition: number;

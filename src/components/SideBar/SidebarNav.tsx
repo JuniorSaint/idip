@@ -21,9 +21,14 @@ export default function SidebarNav({ data }: SideBarProps) {
       height="85vh"
     >
       <VStack spacing="1rem">
-        {data?.sub === "admin" ? (
-          <VStack spacing="16px" marginTop="24px" alignItems="flex-start">
-            <SubTitleSideBar subTitle="Usuários" />
+        {data?.sub === "admin" && (
+          <VStack
+            spacing="16px"
+            marginTop="24px"
+            marginLeft="44px"
+            alignItems="flex-start"
+          >
+            <SubTitleSideBar subTitle="Administrador" />
             <LinkSideBar
               nameLink="Lista de Usuários"
               icon={FiUsers}
@@ -32,42 +37,33 @@ export default function SidebarNav({ data }: SideBarProps) {
             <LinkSideBar
               nameLink="Criar Usuário"
               icon={FiUserPlus}
-              goTo="/users/createuser"
+              goTo="/users/new"
             />
+            <LinkSideBar
+              nameLink="Cadastro de treinamento"
+              icon={RiTodoLine}
+              goTo="/training/registertraining"
+            />
+            <LinkSideBar
+              nameLink="Lista de Treinos por usuário"
+              icon={BsListCheck}
+              goTo="/training/listexercisebyuser"
+            />
+            <Divider />
           </VStack>
-        ) : (
-          ""
         )}
-        {data?.sub === "admin" ? (
-          <Flex>
-            <Divider width="300px" />
-          </Flex>
-        ) : (
-          ""
-        )}
-        <VStack spacing="16px" marginTop="24px" alignItems="flex-start">
-          <SubTitleSideBar subTitle="Treinamento" />
-          {data?.sub === "admin" ? (
-            <VStack spacing="16px">
-              <LinkSideBar
-                nameLink="Cadastro de treinamento"
-                icon={RiTodoLine}
-                goTo="/training/registertraining"
-              />
-              <LinkSideBar
-                nameLink="Lista de Treinos por usuário"
-                icon={BsListCheck}
-                goTo="listexercisebyuser"
-              />
-            </VStack>
-          ) : (
-            ""
-          )}
 
+        <VStack spacing="16px" marginTop="24px" alignItems="flex-start">
+          <SubTitleSideBar subTitle="Usuários" />
           <LinkSideBar
             nameLink="Exercício a fazer"
             icon={MdDirectionsRun}
-            goTo="userexercisetodo"
+            goTo="/training/userexercisetodo"
+          />
+          <LinkSideBar
+            nameLink="Apagar perfil"
+            icon={FiUserPlus}
+            goTo="/deleteperfiluser"
           />
         </VStack>
       </VStack>

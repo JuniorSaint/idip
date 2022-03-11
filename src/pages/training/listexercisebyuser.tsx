@@ -6,6 +6,12 @@ import {
   Icon,
   Input,
   VStack,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
@@ -25,35 +31,43 @@ export default function ListExerciseByUser({ data }) {
   const [initialDate, setInitialDate] = useState<string>();
   const [finalDate, setFinalDate] = useState<string>();
   const [listExercise, setListExercise] = useState<IRegisterTraing[]>([]);
+  const [searchExercise, setSearchExercise] = useState<IRegisterTraing[]>([]);
 
   const { userForSelect } = useUserContextProvider();
 
   useEffect(() => {
     try {
       apiJson.get("registedTraing").then((response) => {
-        setListExercise(response.data);
+        setListExercise(response.data),
+          console.log("passei antes"),
+          console.log(JSON.stringify(listExercise, null, 2)),
+          console.log("passei depois");
       });
     } catch (error) {
       console.error(error.toJson());
     }
   }, []);
 
-  function searchExerciseByUser(initialDate, finalDate) {
+  function searchExerciseByUser(user, initialDate, finalDate) {
     if (initialDate > finalDate) {
       [initialDate, finalDate] = [finalDate, initialDate];
-      console.log(`inicial ${initialDate} final ${initialDate}`);
     }
-    const result = listExercise.map((resp) => {
-      return resp.dateTraining >= initialDate && resp.dateTraining <= finalDate
-        ? resp
-        : null;
-    });
 
-    console.log(listExercise);
+    setSearchExercise(
+      listExercise.filter((resp) => {
+        return resp.dateTraining >= initialDate &&
+          resp.dateTraining <= finalDate
+          ? resp
+          : null;
+      })
+    );
   }
 
   return (
     <Box>
+      <Head>
+        <title>Exercício Usuário</title>
+      </Head>
       <Header dataProp={data} />
       <Flex width="100%" my="6" maxWidth="1480px" mx="auto" px="6">
         <SidebarNav data={data} />
@@ -118,7 +132,7 @@ export default function ListExerciseByUser({ data }) {
                 backgroundColor="orange.400"
                 margin="30px 0 0 1rem"
                 onClick={() => {
-                  searchExerciseByUser(initialDate, finalDate);
+                  searchExerciseByUser(initialDate, finalDate, userName);
                 }}
               >
                 <Icon as={BsSearch} />
@@ -126,8 +140,26 @@ export default function ListExerciseByUser({ data }) {
               </Button>
             </Flex>
           </Flex>
-
-          <Flex>{/* <ItemsToRender /> */}</Flex>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Tipo de exercício</Th>
+                <Th isNumeric>Carga</Th>
+                <Th isNumeric>Quantidade de vezes</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {listExercise.listTraining?.map((data) => {
+                return (
+                  <Tr key={data.id}>
+                    <Td>{data.exerciseType}</Td>
+                    <Td isNumeric>{data.weight} (mm)</Td>
+                    <Td isNumeric>{data.amountRepetition}</Td>
+                  </Tr>
+                );
+              })}
+            </Tbody>
+          </Table>
         </VStack>
       </Flex>
     </Box>
@@ -136,16 +168,8 @@ export default function ListExerciseByUser({ data }) {
 
 import jwt_decode from "jwt-decode";
 import { GetServerSideProps } from "next";
-
-interface IDecodeToken {
-  acr: string; // foto
-  aud: string; //
-  email: string; // email
-  exp: number; // expiração
-  sub: string; // tipo de usuário
-  name: string; // userName
-  sid: string; // id do usuário
-}
+import { IDecodeToken } from "../../components/IDecodeToken";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const destructureCookie: IDecodeToken = jwt_decode(

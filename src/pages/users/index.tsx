@@ -11,7 +11,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
@@ -39,6 +39,10 @@ export default function ListUsers({ data }) {
     api.delete(`users/${id}`).then(() => updateTable());
   }
 
+  function handleUpdate(id) {
+    Router.push(`/users/${id}`);
+  }
+
   const fetchData = async () => {
     const retriveData = await api.get("users");
     return retriveData.data;
@@ -54,6 +58,9 @@ export default function ListUsers({ data }) {
 
   return (
     <Box>
+      <Head>
+        <title>Lista de Usuário</title>
+      </Head>
       <Header dataProp={data} />
       <Flex width="100%" my="6" maxWidth="1480px" mx="auto" px="6">
         <SidebarNav data={data} />
@@ -91,6 +98,7 @@ export default function ListUsers({ data }) {
                             <Button
                               backgroundColor="gray.900"
                               _hover={{ bg: "gray.800" }}
+                              onClick={() => handleUpdate(data.id)}
                             >
                               {" "}
                               <Icon
@@ -132,6 +140,7 @@ export default function ListUsers({ data }) {
 
 import jwt_decode from "jwt-decode";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 
 interface IDecodeToken {
   acr: string; // foto

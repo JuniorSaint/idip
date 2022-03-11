@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
-import { setCookie } from "nookies";
+import Router from "next/router";
+import { destroyCookie, setCookie } from "nookies";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
 import { api } from "../services/api";
@@ -10,7 +10,8 @@ interface SignInCrendentials {
 }
 
 interface AuthContextData {
-  signIn(credentials: SignInCrendentials): Promise<void>;
+  signIn: (credentials: SignInCrendentials) => Promise<void>;
+  signOut: () => void;
   isAuthenticated: boolean;
   user: User;
 }
@@ -29,10 +30,13 @@ interface User {
 
 export const AuthContext = createContext({} as AuthContextData);
 
+export function signOut() {
+  destroyCookie(undefined, "idipToken");
+  Router.push("/");
+}
+
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
-
-  const router = useRouter();
 
   const isAuthenticated = !!user;
 
@@ -48,14 +52,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
-      router.push("/welcome");
+      Router.push("/welcome");
     } catch (error) {
       console.error(error);
     }
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, isAuthenticated, user }}>
+    <AuthContext.Provider value={{ signIn, isAuthenticated, user, signOut }}>
       {children}
     </AuthContext.Provider>
   );

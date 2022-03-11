@@ -1,13 +1,18 @@
 import { Box, Flex } from "@chakra-ui/react";
 import jwt_decode from "jwt-decode";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 
 import Header from "../components/Header/header";
+import { IDecodeToken } from "../components/IDecodeToken";
 import SidebarNav from "../components/SideBar/SidebarNav";
 
 export default function Welcome({ data }) {
   return (
     <Box>
+      <Head>
+        <title>Bem vindo ao IdIp</title>
+      </Head>{" "}
       <Header dataProp={data} />
       <Flex width="100%" my="6" maxWidth="1480px" mx="auto" px="6">
         <SidebarNav data={data} />
@@ -15,16 +20,6 @@ export default function Welcome({ data }) {
       </Flex>
     </Box>
   );
-}
-
-interface IDecodeToken {
-  acr: string; // foto
-  aud: string; //
-  email: string; // email
-  exp: number; // expiração
-  sub: string; // tipo de usuário
-  name: string; // userName
-  sid: string; // id do usuário
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
