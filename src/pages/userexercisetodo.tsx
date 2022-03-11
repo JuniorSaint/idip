@@ -3,17 +3,25 @@ import { Flex } from "@chakra-ui/react";
 import jwt_decode from "jwt-decode";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import Header from "../components/Header/header";
 import { IDecodeToken } from "../components/IDecodeToken";
+import SidebarNav from "../components/SideBar/SidebarNav";
 
-export default function UserExerciseToDo() {
+interface ListUsersProps {
+  data: any;
+}
+
+export default function UserExerciseToDo({ data }: ListUsersProps) {
   return (
-    <>
-      <Flex>
-        <Head>
-          <title>Exercícios a fazer</title>
-        </Head>{" "}
+    <Flex>
+      <Head>
+        <title>Exercícios a fazer</title>
+      </Head>{" "}
+      <Header dataProp={data} />
+      <Flex width="100%" my="6" maxWidth="1480px" mx="auto" px="6">
+        <SidebarNav data={data} />
       </Flex>
-    </>
+    </Flex>
   );
 }
 

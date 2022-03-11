@@ -94,18 +94,17 @@ export default function RegisterTraining({ data }: RegisterTrainingProps) {
     event
   ) => {
     event.preventDefault();
-    (values) => alert(JSON.stringify(values, null, 2));
 
-    // try {
-    //   await apiJson
-    //     .post("/registedTraing", value)
-    //     .then((response) => {
-    //       console.log(response.data), reset();
-    //     })
-    //     .catch((error) => console.log(error.response.request._response));
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    try {
+      await apiJson
+        .post("/registedTraing", value)
+        .then((response) => {
+          console.log(response.data), reset();
+        })
+        .catch((error) => console.log(error.response.request._response));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

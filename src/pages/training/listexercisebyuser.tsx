@@ -39,9 +39,7 @@ export default function ListExerciseByUser({ data }) {
     try {
       apiJson.get("registedTraing").then((response) => {
         setListExercise(response.data),
-          console.log("passei antes"),
-          console.log(JSON.stringify(listExercise, null, 2)),
-          console.log("passei depois");
+          console.log(JSON.stringify(listExercise, null, 2));
       });
     } catch (error) {
       console.error(error.toJson());

@@ -25,7 +25,7 @@ interface ListUsersProps {
   data: any;
 }
 
-export default function ListUsers({ data }) {
+export default function ListUsers({ data }: ListUsersProps) {
   const router = useRouter();
 
   const [users, setUsers] = useState<IUserListProps[]>([]);
