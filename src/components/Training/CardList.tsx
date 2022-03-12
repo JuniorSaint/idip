@@ -1,24 +1,47 @@
-import { Box, Flex } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { apiJson } from "../../services/api";
+import { Box, Flex, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+
+import { api } from "../../services/api";
 import { IRegisterTraing } from "./ITraining";
 
 interface ItemsToRenderProps {
-  listUsers: IRegisterTraing[];
+  idExercise: string;
 }
 
-export default function CardList({ listUsers }: ItemsToRenderProps) {
-  return listUsers.map((resp) => {
-    return (
-      <Box>
-        <Flex>
-          <span>Data do Treino</span> <span>{resp.dateTraining}</span>
-        </Flex>
-        <Flex>
-          <span>Treino Pago</span> <span>{resp.isPaid}</span>
-        </Flex>
-        <Flex></Flex>
-      </Box>
-    );
-  });
+export default function CardList({ idExercise }: ItemsToRenderProps) {
+  const [listExercise, setListExercise] = useState<IRegisterTraing>();
+
+  useEffect(() => {
+    api
+      .get(`/exerciseTraining/${idExercise}`)
+      .then((resp) => setListExercise(resp.data));
+  }, []);
+
+  <Box>
+    <Flex>
+      <span>Data do Treino</span> <span>{listExercise.dateTraining}</span>
+    </Flex>
+    <Flex>
+      <Table variant="simple">
+        <Thead>
+          <Tr>
+            <Th>Exercício</Th>
+            <Th isNumeric>Carga</Th>
+            <Th isNumeric>Repetição</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {listExercise.listTraining.map((resp) => {
+            return (
+              <Tr key={resp.id}>
+                <Td>{resp.exerciseType}</Td>
+                <Td isNumeric>{resp.weight}</Td>
+                <Td isNumeric>{resp.amountRepetition}</Td>
+              </Tr>
+            );
+          })}
+        </Tbody>
+      </Table>
+    </Flex>
+  </Box>;
 }

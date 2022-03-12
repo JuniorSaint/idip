@@ -1,8 +1,10 @@
 import {
+  Button,
   Flex,
   Table,
   TableCaption,
   Tbody,
+  Td,
   Th,
   Thead,
   Tr,
@@ -23,8 +25,9 @@ export default function Userexercisetodo({ data }: CreateUserProps) {
   const [listExec, setListExec] = useState<IRegisterTraing[]>([]);
 
   useEffect(() => {
-    const result = apiJson.get("/registedTraing");
-    console.log(result);
+    apiJson
+      .get(`/registedTraing/${data.id}`)
+      .then((resp) => setListExec(resp.data));
   }, []);
 
   useEffect(() => {}, []);
@@ -43,18 +46,19 @@ export default function Userexercisetodo({ data }: CreateUserProps) {
           </Tr>
         </Thead>
         <Tbody>
-          {/* {
-            {listExec.map(resp => {
-              return(
-                <Tr key={resp.id}>
-          <Td>{resp.userName}</Td>
-          <Td>{resp.dateTraining}</Td>
-          <Td><Button   onClick={() => executeExercice(resp.id)}  >Visualizar</Button></Td>
-     
-                </Tr>
-              )
-            })}
-          } */}
+          {listExec.map((resp) => {
+            return (
+              <Tr key={resp.id}>
+                <Td>{resp.userName}</Td>
+                <Td>{resp.dateTraining}</Td>
+                <Td>
+                  <Button onClick={() => executeExercice(resp.userName)}>
+                    Visualizar
+                  </Button>
+                </Td>
+              </Tr>
+            );
+          })}
         </Tbody>
       </Table>
       <Flex>{/* <CardList listUsers={} /> */}</Flex>
