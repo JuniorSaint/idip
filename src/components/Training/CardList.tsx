@@ -1,4 +1,14 @@
-import { Box, Flex, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import { api } from "../../services/api";
@@ -10,6 +20,10 @@ interface ItemsToRenderProps {
 
 export default function CardList({ idExercise }: ItemsToRenderProps) {
   const [listExercise, setListExercise] = useState<IRegisterTraing>();
+
+  function salveExerciseConcluded(id) {
+    // api.patch(`/exerciseTraining/${id}`, isPaid: true );
+  }
 
   useEffect(() => {
     api
@@ -42,6 +56,15 @@ export default function CardList({ idExercise }: ItemsToRenderProps) {
           })}
         </Tbody>
       </Table>
+    </Flex>
+    <Flex>
+      <Button
+        onClick={() => {
+          salveExerciseConcluded(listExercise.id);
+        }}
+      >
+        Exercício Concluído
+      </Button>
     </Flex>
   </Box>;
 }
