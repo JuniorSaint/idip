@@ -26,6 +26,28 @@
       "userName": "be670c04-24a4-4bd6-ad5b-33275a4b37a8",
       "dateTraining": "2022-03-09",
       "id": 1
+    },
+    {
+      "listTraining": [
+        {
+          "exerciseType": "Bícep curl com Barra W",
+          "weight": "10",
+          "amountRepetion": "15"
+        },
+        {
+          "exerciseType": "Bent Over Row com Barra ",
+          "weight": "22",
+          "amountRepetion": "17"
+        },
+        {
+          "exerciseType": "One Arm Row com Halteres",
+          "weight": "5",
+          "amountRepetion": "10"
+        }
+      ],
+      "userName": "63aef69d-1c21-4712-9ef9-0dbf1af83169",
+      "dateTraining": "2022-03-17",
+      "id": 2
     }
   ],
   "exercises": [

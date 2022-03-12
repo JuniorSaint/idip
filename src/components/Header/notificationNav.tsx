@@ -1,12 +1,12 @@
-import { Flex, HStack, Icon, Input } from '@chakra-ui/react';
-import { useState } from 'react';
-import { RiNotificationLine, RiUserAddLine } from 'react-icons/ri';
+import { Flex, HStack, Icon, Input } from "@chakra-ui/react";
+import { useState } from "react";
+import { RiNotificationLine, RiUserAddLine } from "react-icons/ri";
 
 export default function NotificationNav() {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   return (
     <>
-      <Flex
+      {/* <Flex
         as="label"
         flex="1"
         padding="16px 32px"
@@ -24,16 +24,16 @@ export default function NotificationNav() {
           paddingRight="4"
           marginRight="4"
           value={searchText}
-          onChange={e => setSearchText(e.target.value)}
+          onChange={(e) => setSearchText(e.target.value)}
           placeholder="Buscar na plataforma"
-          _placeholder={{ color: 'gray.400' }}
+          _placeholder={{ color: "gray.400" }}
         />
-      </Flex>
+      </Flex> */}
       <Flex alignItems="center" marginLeft="auto">
         <HStack
-          spacing={['6', '8']}
-          mx={['6', '8']}
-          pr={['6', '8']}
+          spacing={["6", "8"]}
+          mx={["6", "8"]}
+          pr={["6", "8"]}
           py="1"
           borderRightWidth="1px"
           borderColor="green.700"

@@ -1,6 +1,9 @@
 import Router from "next/router";
 import { destroyCookie, setCookie } from "nookies";
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { IDecodeToken } from "../components/IDecodeToken";
+import { GetServerSideProps } from "next";
+import jwt_decode from "jwt-decode";
 
 import { api } from "../services/api";
 

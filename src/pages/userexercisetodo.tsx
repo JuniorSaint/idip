@@ -6,6 +6,7 @@ import Head from "next/head";
 import Header from "../components/Header/header";
 import { IDecodeToken } from "../components/IDecodeToken";
 import SidebarNav from "../components/SideBar/SidebarNav";
+import { getServerSideProps } from "../context/CookieContex";
 
 interface ListUsersProps {
   data: any;
@@ -25,11 +26,11 @@ export default function UserExerciseToDo({ data }: ListUsersProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const destructureCookie: IDecodeToken = jwt_decode(
-    context.req.cookies.idipToken
-  );
-  const data: IDecodeToken = destructureCookie;
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const destructureCookie: IDecodeToken = jwt_decode(
+//     context.req.cookies.idipToken
+//   );
+//   const data: IDecodeToken = destructureCookie;
 
-  return { props: { data } };
-};
+//   return { props: { data } };
+// };

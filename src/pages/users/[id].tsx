@@ -167,6 +167,7 @@ export default function CreateUser({ data }: CreateUserProps) {
             <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
               <Flex flexDirection="column">
                 <FormLabel as="legend">Situação do Usuário</FormLabel>
+
                 <Select
                   placeholder="..."
                   {...register("isActive")}
@@ -195,7 +196,7 @@ export default function CreateUser({ data }: CreateUserProps) {
           <Flex marginTop="24px" gap="16px" justifyContent="flex-end">
             <HStack>
               <Button type="submit" colorScheme="twitter">
-                Salvar
+                {id === "new" ? "Salvar" : "Atualizar"}
               </Button>
               <Button type="reset" colorScheme="teal">
                 Limpar
