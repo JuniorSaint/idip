@@ -12,9 +12,6 @@ export default function CardList({ listUsers }: ItemsToRenderProps) {
     return (
       <Box>
         <Flex>
-          <span>Nome:</span> <span>{resp.userName}</span>
-        </Flex>
-        <Flex>
           <span>Data do Treino</span> <span>{resp.dateTraining}</span>
         </Flex>
         <Flex>
