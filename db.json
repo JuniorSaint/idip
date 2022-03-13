@@ -18,10 +18,33 @@
           "amountRepetion": "10"
         }
       ],
-      "userName": "Maria Aparecida",
+      "userName": "José Atanazio",
       "dateTraining": "2022-03-17",
       "isPaid": false,
       "id": 2
+    },
+    {
+      "listTraining": [
+        {
+          "exerciseType": "Bícep curl com Barra W",
+          "weight": "10",
+          "amountRepetion": "15"
+        },
+        {
+          "exerciseType": "Bent Over Row com Barra ",
+          "weight": "22",
+          "amountRepetion": "17"
+        },
+        {
+          "exerciseType": "One Arm Row com Halteres",
+          "weight": "5",
+          "amountRepetion": "10"
+        }
+      ],
+      "userName": "Maria Aparecida",
+      "dateTraining": "2022-03-17",
+      "isPaid": true,
+      "id": 3
     },
     {
       "listTraining": [
@@ -43,7 +66,7 @@
       ],
       "userName": "Marli Teixeira da Silva",
       "dateTraining": "2022-03-17",
-      "id": 3,
+      "id": 1,
       "isPaid": false
     }
   ],

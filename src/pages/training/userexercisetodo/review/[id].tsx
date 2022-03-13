@@ -86,13 +86,15 @@ export default function Userexercisetodo2({ data }: CreateUserProps) {
         >
           Voltar a lista
         </Button>
-        <Button
-          margin="1rem "
-          backgroundColor="orange.400"
-          onClick={() => executedExercice()}
-        >
-          Exercício Concluído
-        </Button>
+        {!listExec?.isPaid && (
+          <Button
+            margin="1rem "
+            backgroundColor="orange.400"
+            onClick={() => executedExercice()}
+          >
+            Exercício Concluído
+          </Button>
+        )}
       </Flex>
     </Flex>
   );
