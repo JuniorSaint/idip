@@ -16,16 +16,16 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { BsTrash } from "react-icons/bs";
 import * as yup from "yup";
 
-import { Input as Inputc } from "../../components/Form/Input";
-import Header from "../../components/Header/header";
-import { IDecodeToken } from "../../components/IDecodeToken";
-import SidebarNav from "../../components/SideBar/SidebarNav";
+import { Input as Inputc } from "../../../components/Form/Input";
+import Header from "../../../components/Header/header";
+import { IDecodeToken } from "../../../components/IDecodeToken";
+import SidebarNav from "../../../components/SideBar/SidebarNav";
 import {
   IListExercise,
   IRegisterTraing,
-} from "../../components/Training/ITraining";
-import { useUserContextProvider } from "../../context/UserContext";
-import { apiJson } from "../../services/api";
+} from "../../../components/Training/ITraining";
+import { useUserContextProvider } from "../../../context/UserContext";
+import { apiJson } from "../../../services/api";
 
 const trainingSchema = yup
   .object({

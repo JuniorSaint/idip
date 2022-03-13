@@ -23,7 +23,7 @@
           "amountRepetion": "21"
         }
       ],
-      "userName": "be670c04-24a4-4bd6-ad5b-33275a4b37a8",
+      "userName": "José Atanazio",
       "dateTraining": "2022-03-09",
       "id": 1
     },
@@ -45,9 +45,31 @@
           "amountRepetion": "10"
         }
       ],
-      "userName": "63aef69d-1c21-4712-9ef9-0dbf1af83169",
+      "userName": "Maria Aparecida",
       "dateTraining": "2022-03-17",
       "id": 2
+    },
+    {
+      "listTraining": [
+        {
+          "exerciseType": "push up",
+          "weight": "10",
+          "amountRepetion": "10"
+        },
+        {
+          "exerciseType": "Agachamentos com Barra",
+          "weight": "15",
+          "amountRepetion": "10"
+        },
+        {
+          "exerciseType": "Bícep Curl com Halteres",
+          "weight": "10",
+          "amountRepetion": "15"
+        }
+      ],
+      "userName": "Marli Teixeira da Silva",
+      "dateTraining": "2022-03-17",
+      "id": 3
     }
   ],
   "exercises": [

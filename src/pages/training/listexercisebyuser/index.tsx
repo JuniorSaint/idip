@@ -16,11 +16,11 @@ import {
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 
-import Header from "../../components/Header/header";
-import SidebarNav from "../../components/SideBar/SidebarNav";
-import { IRegisterTraing } from "../../components/Training/ITraining";
-import { useUserContextProvider } from "../../context/UserContext";
-import { apiJson } from "../../services/api";
+import Header from "../../../components/Header/header";
+import SidebarNav from "../../../components/SideBar/SidebarNav";
+import { IRegisterTraing } from "../../../components/Training/ITraining";
+import { useUserContextProvider } from "../../../context/UserContext";
+import { apiJson } from "../../../services/api";
 
 interface ListExerciseByUser {
   data: any;
@@ -32,6 +32,7 @@ export default function ListExerciseByUser({ data }) {
   const [finalDate, setFinalDate] = useState<string>();
   const [listExercise, setListExercise] = useState<IRegisterTraing[]>([]);
   const [searchExercise, setSearchExercise] = useState<IRegisterTraing[]>([]);
+  const router = useRouter();
 
   const { userForSelect } = useUserContextProvider();
 
@@ -45,6 +46,10 @@ export default function ListExerciseByUser({ data }) {
       console.error(error.toJson());
     }
   }, []);
+
+  function reviewTraining(id) {
+    router?.push(`/training/listexercisebyuser/review/${id}`);
+  }
 
   function searchExerciseByUser(user, initialDate, finalDate) {
     if (initialDate > finalDate) {
@@ -141,18 +146,31 @@ export default function ListExerciseByUser({ data }) {
           <Table variant="simple">
             <Thead>
               <Tr>
-                <Th>Tipo de exercício</Th>
-                <Th isNumeric>Carga</Th>
-                <Th isNumeric>Quantidade de vezes</Th>
+                <Th>Nome do Usuário</Th>
+                <Th isNumeric>Data </Th>
+                <Th isNumeric>Ação</Th>
               </Tr>
             </Thead>
             <Tbody>
-              {listExercise.listTraining?.map((data) => {
+              {listExercise?.map((data) => {
                 return (
                   <Tr key={data.id}>
-                    <Td>{data.exerciseType}</Td>
-                    <Td isNumeric>{data.weight} (mm)</Td>
-                    <Td isNumeric>{data.amountRepetition}</Td>
+                    <Td>{data?.userName}</Td>
+                    <Td isNumeric>
+                      {new Intl.DateTimeFormat("pt-BR").format(
+                        new Date(data?.dateTraining)
+                      )}
+                    </Td>
+                    <Td isNumeric>
+                      <Button
+                        backgroundColor="red.300"
+                        onClick={() => {
+                          reviewTraining(data?.id);
+                        }}
+                      >
+                        Visualizar Treino
+                      </Button>
+                    </Td>
                   </Tr>
                 );
               })}
@@ -166,8 +184,9 @@ export default function ListExerciseByUser({ data }) {
 
 import jwt_decode from "jwt-decode";
 import { GetServerSideProps } from "next";
-import { IDecodeToken } from "../../components/IDecodeToken";
+import { IDecodeToken } from "../../../components/IDecodeToken";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const destructureCookie: IDecodeToken = jwt_decode(
