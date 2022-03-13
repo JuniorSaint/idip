@@ -82,7 +82,7 @@ export default function Userexercisetodo2({ data }: CreateUserProps) {
         <Button
           margin="1rem "
           backgroundColor="orange.400"
-          onClick={() => router.push("/training/listexercisebyuser")}
+          onClick={() => router.push("/training/userexercisetodo")}
         >
           Voltar a lista
         </Button>
