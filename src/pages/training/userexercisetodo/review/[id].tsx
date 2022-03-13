@@ -17,27 +17,24 @@ import { useEffect, useState } from "react";
 
 import { IDecodeToken } from "../../../../components/IDecodeToken";
 import { IRegisterTraing } from "../../../../components/Training/ITraining";
-import { apiJson } from "../../../../services/api";
+import { api, apiJson } from "../../../../services/api";
 
 interface CreateUserProps {
   data: any;
 }
 
-export default function Userexercisetodo({ data }: CreateUserProps) {
+export default function Userexercisetodo2({ data }: CreateUserProps) {
   const [listExec, setListExec] = useState<IRegisterTraing>();
   const router = useRouter();
   const id = router.query.id;
-
-  function deleteTraining(id) {
-    apiJson.delete(`/registedTraing/${id}`);
-    router.push("/training/listexercisebyuser");
-  }
 
   useEffect(() => {
     apiJson.get(`/registedTraing/${id}`).then((resp) => setListExec(resp.data));
   }, []);
 
-  function executeExercice(id) {}
+  function executedExercice() {
+    // apiJson.patch(`registedTraing/${id}`).then(resp => )  // passar somente o atributo isPaid para true
+  }
 
   return (
     <Flex flexDirection="column">
@@ -58,14 +55,6 @@ export default function Userexercisetodo({ data }: CreateUserProps) {
             Data do Treino:
           </Text>
           <span>{listExec?.dateTraining}</span>
-        </Flex>
-        <Flex>
-          <Text fontSize="1rem" fontWeight="bold" marginRight="10px">
-            Treino concluído:
-          </Text>
-          <span>
-            {listExec?.isPaid === false ? "Não concluído" : "Concluído"}
-          </span>
         </Flex>
       </Flex>
 
@@ -100,9 +89,9 @@ export default function Userexercisetodo({ data }: CreateUserProps) {
         <Button
           margin="1rem "
           backgroundColor="orange.400"
-          onClick={() => deleteTraining(listExec.id)}
+          onClick={() => executedExercice()}
         >
-          Apagar Treino
+          Exercício Concluído
         </Button>
       </Flex>
     </Flex>

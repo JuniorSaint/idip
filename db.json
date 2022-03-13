@@ -3,33 +3,6 @@
     {
       "listTraining": [
         {
-          "exerciseType": "One Arm Row com Halteres",
-          "weight": "10",
-          "amountRepetion": "15"
-        },
-        {
-          "exerciseType": "Bícep curl com Barra W",
-          "weight": "1",
-          "amountRepetion": "21"
-        },
-        {
-          "exerciseType": "Agachamentos com Barra",
-          "weight": "11",
-          "amountRepetion": "21"
-        },
-        {
-          "exerciseType": "Calf Raise sentado",
-          "weight": "5",
-          "amountRepetion": "21"
-        }
-      ],
-      "userName": "José Atanazio",
-      "dateTraining": "2022-03-09",
-      "id": 1
-    },
-    {
-      "listTraining": [
-        {
           "exerciseType": "Bícep curl com Barra W",
           "weight": "10",
           "amountRepetion": "15"
@@ -47,6 +20,7 @@
       ],
       "userName": "Maria Aparecida",
       "dateTraining": "2022-03-17",
+      "isPaid": false,
       "id": 2
     },
     {
@@ -69,7 +43,8 @@
       ],
       "userName": "Marli Teixeira da Silva",
       "dateTraining": "2022-03-17",
-      "id": 3
+      "id": 3,
+      "isPaid": false
     }
   ],
   "exercises": [
