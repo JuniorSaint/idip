@@ -68,6 +68,29 @@
       "dateTraining": "2022-03-17",
       "id": 1,
       "isPaid": false
+    },
+    {
+      "isPaid": false,
+      "listTraining": [
+        {
+          "exerciseType": "Bícep curl com Barra W",
+          "weight": "10",
+          "amountRepetion": "15"
+        },
+        {
+          "exerciseType": "Trícep extension",
+          "weight": "11",
+          "amountRepetion": "10"
+        },
+        {
+          "exerciseType": "Bent Over Row com Barra ",
+          "weight": "10",
+          "amountRepetion": "5"
+        }
+      ],
+      "userName": "003d8b5c-ce4d-4e05-8489-ab3de74fd87f",
+      "dateTraining": "2022-03-23",
+      "id": 4
     }
   ],
   "exercises": [

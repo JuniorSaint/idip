@@ -55,6 +55,7 @@ export default function RegisterTraining({ data }: RegisterTrainingProps) {
     formState: { errors },
   } = useForm<IRegisterTraing>({
     defaultValues: {
+      isPaid: false,
       listTraining: [
         {
           id: undefined,
